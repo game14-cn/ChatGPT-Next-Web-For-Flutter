@@ -53,6 +53,7 @@ const id: PartialLocaleType = {
       Masks: "Masks",
       Clear: "Bersihkan Percakapan",
       Settings: "Pengaturan",
+      Voice: "Voice",
     },
     Rename: "Ubah Nama Chat",
     Typing: "Mengetik...",

@@ -37,6 +37,7 @@ import AutoIcon from "../icons/auto.svg";
 import BottomIcon from "../icons/bottom.svg";
 import StopIcon from "../icons/pause.svg";
 import RobotIcon from "../icons/robot.svg";
+import VoiceIcon from "../icons/voice.svg";
 
 import {
   ChatMessage,
@@ -575,6 +576,16 @@ export function ChatActions(props: {
           }}
         />
       )}
+
+      <ChatAction
+        onClick={() => {
+          // TODO
+          
+        }}
+        text={Locale.Chat.InputActions.Voice}
+        icon={<VoiceIcon />}
+      />
+
     </div>
   );
 }
