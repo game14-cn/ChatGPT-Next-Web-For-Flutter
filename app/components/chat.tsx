@@ -499,7 +499,7 @@ export function ChatActions(props: {
       {props.hitBottom && (
         <ChatAction
           onClick={() => {
-            props.showPromptModal;
+            props.showPromptModal();
             if (showFlutterAction) {
               window.NativeBridge.settings();
             }
