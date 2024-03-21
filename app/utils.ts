@@ -300,3 +300,7 @@ export function isVisionModel(model: string) {
 
   return visionKeywords.some(keyword => model.includes(keyword));
 }
+
+export function isFlutter(): boolean {
+  return (typeof window !== "undefined" && typeof window.flutter_inappwebview !== "undefined");
+}

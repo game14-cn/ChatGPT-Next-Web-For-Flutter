@@ -61,6 +61,7 @@ import {
   getMessageImages,
   isVisionModel,
   compressImage,
+  isFlutter
 } from "../utils";
 
 import dynamic from "next/dynamic";
@@ -455,6 +456,7 @@ export function ChatActions(props: {
   );
   const [showModelSelector, setShowModelSelector] = useState(false);
   const [showUploadImage, setShowUploadImage] = useState(false);
+  const [showFlutterAction, setShowFlutterAction] = useState(false);
 
   useEffect(() => {
     const show = isVisionModel(currentModel);
@@ -463,6 +465,8 @@ export function ChatActions(props: {
       props.setAttachImages([]);
       props.setUploading(false);
     }
+
+    setShowFlutterAction(isFlutter());
 
     // if current model is not available
     // switch to first available model
@@ -494,7 +498,12 @@ export function ChatActions(props: {
       )}
       {props.hitBottom && (
         <ChatAction
-          onClick={props.showPromptModal}
+          onClick={() => {
+            props.showPromptModal;
+            if (showFlutterAction) {
+              window.NativeBridge.settings();
+            }
+          }}
           text={Locale.Chat.InputActions.Settings}
           icon={<SettingsIcon />}
         />
@@ -577,14 +586,15 @@ export function ChatActions(props: {
         />
       )}
 
-      <ChatAction
-        onClick={() => {
-          // TODO
-          
-        }}
-        text={Locale.Chat.InputActions.Voice}
-        icon={<VoiceIcon />}
-      />
+      {showFlutterAction && (
+        <ChatAction
+          onClick={() => {
+            window.NativeBridge.startVoiceRecording();
+          }}
+          text={Locale.Chat.InputActions.Voice}
+          icon={<VoiceIcon />}
+        />
+      )}
 
     </div>
   );
