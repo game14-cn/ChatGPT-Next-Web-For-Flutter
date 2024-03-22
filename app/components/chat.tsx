@@ -61,7 +61,7 @@ import {
   getMessageImages,
   isVisionModel,
   compressImage,
-  isFlutter
+  isFlutter,
 } from "../utils";
 
 import dynamic from "next/dynamic";
@@ -501,7 +501,7 @@ export function ChatActions(props: {
           onClick={() => {
             props.showPromptModal();
             if (showFlutterAction) {
-              window.NativeBridge.settings();
+              window.flutter_inappwebview.callHandler("settings");
             }
           }}
           text={Locale.Chat.InputActions.Settings}
@@ -589,13 +589,12 @@ export function ChatActions(props: {
       {showFlutterAction && (
         <ChatAction
           onClick={() => {
-            window.NativeBridge.startVoiceRecording();
+            window.flutter_inappwebview.callHandler("startVoiceRecording");
           }}
           text={Locale.Chat.InputActions.Voice}
           icon={<VoiceIcon />}
         />
       )}
-
     </div>
   );
 }
@@ -1123,11 +1122,13 @@ function _Chat() {
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-  
+
   const handlePaste = useCallback(
     async (event: React.ClipboardEvent<HTMLTextAreaElement>) => {
       const currentModel = chatStore.currentSession().mask.modelConfig.model;
-      if(!isVisionModel(currentModel)){return;}
+      if (!isVisionModel(currentModel)) {
+        return;
+      }
       const items = (event.clipboardData || window.clipboardData).items;
       for (const item of items) {
         if (item.kind === "file" && item.type.startsWith("image/")) {
