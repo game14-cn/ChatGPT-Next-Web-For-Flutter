@@ -766,6 +766,11 @@ function _Chat() {
     }
   };
 
+  const flutterCallTest = () => alert("hello from JS");
+  window.flutterCallTest = flutterCallTest;
+
+  window.flutterOnInput = onInput;
+
   const doSubmit = (userInput: string) => {
     if (userInput.trim() === "") return;
     const matchCommand = chatCommands.match(userInput);
