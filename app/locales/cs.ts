@@ -1,5 +1,6 @@
 import { SubmitKey } from "../store/config";
 import type { PartialLocaleType } from "./index";
+import { isFlutter } from "../utils";
 
 const cs: PartialLocaleType = {
   WIP: "V přípravě...",
@@ -25,7 +26,7 @@ const cs: PartialLocaleType = {
     Typing: "Píše...",
     Input: (submitKey: string) => {
       var inputHints = `${submitKey} pro odeslání`;
-      if (submitKey === String(SubmitKey.Enter)) {
+      if (submitKey === String(SubmitKey.Enter) && !isFlutter()) {
         inputHints += ", Shift + Enter pro řádkování";
       }
       return inputHints + ", / pro vyhledávání pokynů";

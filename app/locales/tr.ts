@@ -1,5 +1,6 @@
 import { SubmitKey } from "../store/config";
 import type { PartialLocaleType } from "./index";
+import { isFlutter } from "../utils";
 
 const tr: PartialLocaleType = {
   WIP: "Çalışma devam ediyor...",
@@ -25,7 +26,7 @@ const tr: PartialLocaleType = {
     Typing: "Yazıyor…",
     Input: (submitKey: string) => {
       var inputHints = `Göndermek için ${submitKey}`;
-      if (submitKey === String(SubmitKey.Enter)) {
+      if (submitKey === String(SubmitKey.Enter) && !isFlutter()) {
         inputHints += ", kaydırmak için Shift + Enter";
       }
       return inputHints + ", komutları aramak için / (eğik çizgi)";

@@ -117,7 +117,14 @@ export const KnowledgeCutOffDate: Record<string, string> = {
   "gemini-pro": "2023-12",
 };
 
-export const DEFAULT_MODELS = [
+export function isFlutter(): boolean {
+  return (
+    typeof window !== "undefined" &&
+    typeof window.flutter_inappwebview !== "undefined"
+  );
+}
+
+export const ALL_MODELS = [
   {
     name: "gpt-4",
     available: true,
@@ -290,6 +297,29 @@ export const DEFAULT_MODELS = [
     },
   },
 ] as const;
+
+export const FLUTTER_MODELS = [
+  {
+    name: "gpt-4",
+    available: true,
+    provider: {
+      id: "openai",
+      providerName: "OpenAI",
+      providerType: "openai",
+    },
+  },
+  {
+    name: "gpt-3.5-turbo",
+    available: true,
+    provider: {
+      id: "openai",
+      providerName: "OpenAI",
+      providerType: "openai",
+    },
+  },
+] as const;
+
+export const DEFAULT_MODELS = isFlutter() ? FLUTTER_MODELS : ALL_MODELS;
 
 export const CHAT_PAGE_SIZE = 15;
 export const MAX_RENDER_MSG_COUNT = 45;

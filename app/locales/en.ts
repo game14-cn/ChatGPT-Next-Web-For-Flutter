@@ -1,6 +1,7 @@
 import { getClientConfig } from "../config/client";
 import { SubmitKey } from "../store/config";
 import { LocaleType } from "./index";
+import { isFlutter } from "../utils";
 
 // if you are adding a new translation, please use PartialLocaleType instead of LocaleType
 
@@ -72,7 +73,7 @@ const en: LocaleType = {
     Typing: "Typing…",
     Input: (submitKey: string) => {
       var inputHints = `${submitKey} to send`;
-      if (submitKey === String(SubmitKey.Enter)) {
+      if (submitKey === String(SubmitKey.Enter) && !isFlutter()) {
         inputHints += ", Shift + Enter to wrap";
       }
       return inputHints + ", / to search prompts, : to use commands";

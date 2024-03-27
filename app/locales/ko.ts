@@ -1,6 +1,7 @@
 import { SubmitKey } from "../store/config";
 
 import type { PartialLocaleType } from "./index";
+import { isFlutter } from "../utils";
 
 const ko: PartialLocaleType = {
   WIP: "곧 출시 예정...",
@@ -26,7 +27,7 @@ const ko: PartialLocaleType = {
     Typing: "입력 중...",
     Input: (submitKey: string) => {
       var inputHints = `${submitKey}를 눌러 보내기`;
-      if (submitKey === String(SubmitKey.Enter)) {
+      if (submitKey === String(SubmitKey.Enter) && !isFlutter()) {
         inputHints += ", Shift + Enter로 줄 바꿈";
       }
       return inputHints + ", 프롬프트 검색을 위해 / 입력";

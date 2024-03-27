@@ -1,5 +1,6 @@
 import { SubmitKey } from "../store/config";
 import type { PartialLocaleType } from "./index";
+import { isFlutter } from "../utils";
 
 const ru: PartialLocaleType = {
   WIP: "Скоро...",
@@ -25,7 +26,7 @@ const ru: PartialLocaleType = {
     Typing: "Печатает…",
     Input: (submitKey: string) => {
       var inputHints = `${submitKey} для отправки сообщения`;
-      if (submitKey === String(SubmitKey.Enter)) {
+      if (submitKey === String(SubmitKey.Enter) && !isFlutter()) {
         inputHints += ", Shift + Enter для переноса строки";
       }
       return inputHints + ", / для поиска подсказок";

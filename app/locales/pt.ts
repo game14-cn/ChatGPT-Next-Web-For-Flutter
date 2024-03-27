@@ -1,6 +1,7 @@
 import { SubmitKey } from "../store/config";
 import { PartialLocaleType } from "../locales/index";
 import { getClientConfig } from "../config/client";
+import { isFlutter } from "../utils";
 
 const isApp = !!getClientConfig()?.isApp;
 
@@ -70,7 +71,7 @@ const pt: PartialLocaleType = {
     Typing: "Digitando…",
     Input: (submitKey: string) => {
       var inputHints = `${submitKey} para enviar`;
-      if (submitKey === String(SubmitKey.Enter)) {
+      if (submitKey === String(SubmitKey.Enter) && !isFlutter()) {
         inputHints += ", Shift + Enter para quebrar linha";
       }
       return inputHints + ", / para buscar prompts, : para usar comandos";

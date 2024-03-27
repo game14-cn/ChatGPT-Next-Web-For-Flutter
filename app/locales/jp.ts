@@ -1,5 +1,6 @@
 import { SubmitKey } from "../store/config";
 import type { PartialLocaleType } from "./index";
+import { isFlutter } from "../utils";
 
 const jp: PartialLocaleType = {
   WIP: "この機能は開発中です",
@@ -37,7 +38,7 @@ const jp: PartialLocaleType = {
     Typing: "入力中…",
     Input: (submitKey: string) => {
       var inputHints = `${submitKey} で送信`;
-      if (submitKey === String(SubmitKey.Enter)) {
+      if (submitKey === String(SubmitKey.Enter) && !isFlutter()) {
         inputHints += "，Shift + Enter で改行";
       }
       return inputHints + "，/ で自動補完をトリガー";

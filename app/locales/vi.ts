@@ -1,5 +1,6 @@
 import { SubmitKey } from "../store/config";
 import type { PartialLocaleType } from "./index";
+import { isFlutter } from "../utils";
 
 const vi: PartialLocaleType = {
   WIP: "Sắp ra mắt...",
@@ -25,7 +26,7 @@ const vi: PartialLocaleType = {
     Typing: "Đang nhập…",
     Input: (submitKey: string) => {
       var inputHints = `${submitKey} để gửi`;
-      if (submitKey === String(SubmitKey.Enter)) {
+      if (submitKey === String(SubmitKey.Enter) && !isFlutter()) {
         inputHints += ", Shift + Enter để xuống dòng";
       }
       return inputHints + ", / để tìm kiếm mẫu gợi ý";

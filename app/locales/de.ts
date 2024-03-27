@@ -1,5 +1,6 @@
 import { SubmitKey } from "../store/config";
 import type { PartialLocaleType } from "./index";
+import { isFlutter } from "../utils";
 
 const de: PartialLocaleType = {
   WIP: "In Bearbeitung...",
@@ -25,7 +26,7 @@ const de: PartialLocaleType = {
     Typing: "Tippen...",
     Input: (submitKey: string) => {
       var inputHints = `${submitKey} um zu Senden`;
-      if (submitKey === String(SubmitKey.Enter)) {
+      if (submitKey === String(SubmitKey.Enter) && !isFlutter()) {
         inputHints += ", Umschalt + Eingabe für Zeilenumbruch";
       }
       return inputHints + ", / zum Durchsuchen von Prompts";

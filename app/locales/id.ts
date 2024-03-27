@@ -1,5 +1,6 @@
 import { SubmitKey } from "../store/config";
 import { PartialLocaleType } from "./index";
+import { isFlutter } from "../utils";
 
 const id: PartialLocaleType = {
   WIP: "Coming Soon...",
@@ -59,7 +60,7 @@ const id: PartialLocaleType = {
     Typing: "Mengetik...",
     Input: (submitKey: string) => {
       var inputHints = `${submitKey} untuk mengirim`;
-      if (submitKey === String(SubmitKey.Enter)) {
+      if (submitKey === String(SubmitKey.Enter) && !isFlutter()) {
         inputHints += ", Shift + Enter untuk membalut";
       }
       return (
@@ -370,8 +371,8 @@ const id: PartialLocaleType = {
   },
   Exporter: {
     Description: {
-      Title: "Hanya pesan setelah menghapus konteks yang akan ditampilkan"
-    },  
+      Title: "Hanya pesan setelah menghapus konteks yang akan ditampilkan",
+    },
     Model: "Model",
     Messages: "Pesan",
     Topic: "Topik",

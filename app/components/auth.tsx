@@ -9,6 +9,7 @@ import Locale from "../locales";
 import BotIcon from "../icons/bot.svg";
 import { useEffect } from "react";
 import { getClientConfig } from "../config/client";
+import { isFlutter } from "../utils";
 
 export function AuthPage() {
   const navigate = useNavigate();
@@ -50,7 +51,7 @@ export function AuthPage() {
           );
         }}
       />
-      {!accessStore.hideUserApiKey ? (
+      {!accessStore.hideUserApiKey && !isFlutter() ? (
         <>
           <div className={styles["auth-tips"]}>{Locale.Auth.SubTips}</div>
           <input

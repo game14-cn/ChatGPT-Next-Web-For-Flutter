@@ -1,5 +1,6 @@
 import { SubmitKey } from "../store/config";
 import type { PartialLocaleType } from "./index";
+import { isFlutter } from "../utils";
 
 const no: PartialLocaleType = {
   WIP: "Arbeid pågår ...",
@@ -25,7 +26,7 @@ const no: PartialLocaleType = {
     Typing: "Skriver …",
     Input: (submitKey: string) => {
       var inputHints = `${submitKey} for å sende`;
-      if (submitKey === String(SubmitKey.Enter)) {
+      if (submitKey === String(SubmitKey.Enter) && !isFlutter()) {
         inputHints += ", Shift + Enter for å omgi";
       }
       return inputHints + ", / for å søke instrukser";

@@ -1,5 +1,6 @@
 import { SubmitKey } from "../store/config";
 import { PartialLocaleType } from "./index";
+import { isFlutter } from "../utils";
 
 const bn: PartialLocaleType = {
   WIP: "শীঘ্রই আসছে...",
@@ -59,7 +60,7 @@ const bn: PartialLocaleType = {
     Typing: "টাইপিং...",
     Input: (submitKey: string) => {
       var inputHints = `${submitKey} to send`;
-      if (submitKey === String(SubmitKey.Enter)) {
+      if (submitKey === String(SubmitKey.Enter) && !isFlutter()) {
         inputHints += ", Shift + Enter to wrap";
       }
       return inputHints + ", / to search prompts, : to use commands";
